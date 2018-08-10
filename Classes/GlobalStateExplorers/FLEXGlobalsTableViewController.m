@@ -19,12 +19,14 @@
 #import "FLEXManager+Private.h"
 #import "FLEXSystemLogTableViewController.h"
 #import "FLEXNetworkHistoryTableViewController.h"
+#import "FLEXAppLogViewController.h"
 
 static __weak UIWindow *s_applicationWindow = nil;
 
 typedef NS_ENUM(NSUInteger, FLEXGlobalsRow) {
     FLEXGlobalsRowNetworkHistory,
     FLEXGlobalsRowSystemLog,
+    FLEXGlobalsRowAppLog,
     FLEXGlobalsRowLiveObjects,
     FLEXGlobalsRowFileBrowser,
     FLEXGlobalsCookies,    
@@ -186,6 +188,15 @@ typedef NS_ENUM(NSUInteger, FLEXGlobalsRow) {
                 };
                 viewControllerFuture = ^{
                     return [[FLEXSystemLogTableViewController alloc] init];
+                };
+                break;
+
+            case FLEXGlobalsRowAppLog:
+                titleFuture = ^{
+                    return @"ℹ️  App Log";
+                };
+                viewControllerFuture = ^{
+                    return [[FLEXAppLogViewController alloc] init];
                 };
                 break;
 
