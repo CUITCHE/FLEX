@@ -14,8 +14,9 @@ static NSFileHandle *pipeErrHandle = nil;
 static NSMutableData *logs = nil;
 
 __attribute__((constructor)) static void foo() {
-//    int std_out = dup(STDOUT_FILENO);
-//    int std_err = dup(STDERR_FILENO);
+    if (getppid() > 1) {
+        return;
+    }
 
     stdout->_flags = 10;
     NSPipe *out_pipe = [NSPipe pipe];
